@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29920.165
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IICv2", "Invisible Idle Client v1 by Kova\IICv2.csproj", "{71002696-0351-45E5-84B8-BCE8EC6F49C7}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{71002696-0351-45E5-84B8-BCE8EC6F49C7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{71002696-0351-45E5-84B8-BCE8EC6F49C7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{71002696-0351-45E5-84B8-BCE8EC6F49C7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{71002696-0351-45E5-84B8-BCE8EC6F49C7}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {8CEC876B-E60E-40AD-8259-DB65114FB798}
+	EndGlobalSection
+EndGlobal
