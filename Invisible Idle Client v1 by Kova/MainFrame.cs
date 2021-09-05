@@ -31,7 +31,7 @@ namespace IICv2
         private void Form1_Load(object sender, EventArgs e)
         {
             Title.Text = this.Text;
-            NameText.Text = "ICCv2";
+            NameText.Text = "IICv2";
             steamid.SelectedIndex = 2;
 
             if (File.Exists("names.txt"))

@@ -195,7 +195,8 @@
             "AVSMP 1",
             "AVSMP 0",
             "SettiEmu",
-            "NativeSteam"});
+            "NativeSteam",
+            "MF"});
             this.steamid.Location = new System.Drawing.Point(6, 20);
             this.steamid.Name = "steamid";
             this.steamid.Size = new System.Drawing.Size(145, 21);

@@ -12,33 +12,43 @@ namespace IICv2
         [STAThread]
         static void Main(string[] args)
         {
-        #if DEBUG
-                        args = new string[1];
-                        args[0] = "IdŁ3PŁ4Y3Rv1BYK0V4";
-        #endif
-
-            if (args.Length == 1)
+            try
             {
-                using (System.Security.Cryptography.MD5 md5 = System.Security.Cryptography.MD5.Create())
+                #if DEBUG
+                    args = new string[1];
+                    args[0] = "IdŁ3PŁ4Y3Rv1BYK0V4";
+                #endif
+
+                if (args.Length == 1)
                 {
-                    byte[] inputBytes = System.Text.Encoding.ASCII.GetBytes(args[0]);
-                    byte[] hashBytes = md5.ComputeHash(inputBytes);
-
-                    // Convert the byte array to hexadecimal string
-                    StringBuilder sb = new StringBuilder();
-                    for (int i = 0; i < hashBytes.Length; i++)
+                    using (System.Security.Cryptography.MD5 md5 = System.Security.Cryptography.MD5.Create())
                     {
-                        sb.Append(hashBytes[i].ToString("X2"));
-                    }
+                        byte[] inputBytes = System.Text.Encoding.ASCII.GetBytes(args[0]);
+                        byte[] hashBytes = md5.ComputeHash(inputBytes);
 
-                    if (sb.ToString() == "28E69606EC4BC57D9408AE4DBC4B2EE9")
-                    {
-                        Application.EnableVisualStyles();
-                        Application.SetCompatibleTextRenderingDefault(false);
-                        Application.Run(new FormMain());
+                        // Convert the byte array to hexadecimal string
+                        StringBuilder sb = new StringBuilder();
+                        for (int i = 0; i < hashBytes.Length; i++)
+                        {
+                            sb.Append(hashBytes[i].ToString("X2"));
+                        }
+
+                        if (sb.ToString() == "28E69606EC4BC57D9408AE4DBC4B2EE9")
+                        {
+                            Application.EnableVisualStyles();
+                            Application.SetCompatibleTextRenderingDefault(false);
+                            Application.Run(new FormMain());
+                        }
                     }
                 }
             }
+            catch (Exception)
+            {
+                MessageBox.Show("ERROR", "UNEXEPTED ERROR",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+
         }
     }
 }
