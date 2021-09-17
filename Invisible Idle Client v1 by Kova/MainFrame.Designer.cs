@@ -32,6 +32,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormMain));
             this.ServerList = new System.Windows.Forms.TextBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.btn_change_setinfo = new System.Windows.Forms.Button();
             this.tb_password = new System.Windows.Forms.TextBox();
             this.label11 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
@@ -71,12 +72,14 @@
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.p_msgbox = new System.Windows.Forms.Panel();
             this.lbl_msgbox = new System.Windows.Forms.Label();
-            this.cb_Proxy = new System.Windows.Forms.CheckBox();
             this.cb_NameText = new System.Windows.Forms.CheckBox();
             this.cb_AutoScroll = new System.Windows.Forms.CheckBox();
             this.lbl_Output = new System.Windows.Forms.Label();
             this.rtb_Console = new System.Windows.Forms.RichTextBox();
             this.label8 = new System.Windows.Forms.Label();
+            this.groupBox6 = new System.Windows.Forms.GroupBox();
+            this.label12 = new System.Windows.Forms.Label();
+            this.tb_setinfo = new System.Windows.Forms.TextBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -89,6 +92,7 @@
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
             this.p_msgbox.SuspendLayout();
+            this.groupBox6.SuspendLayout();
             this.SuspendLayout();
             // 
             // ServerList
@@ -104,6 +108,7 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.btn_change_setinfo);
             this.groupBox1.Controls.Add(this.tb_password);
             this.groupBox1.Controls.Add(this.ServerList);
             this.groupBox1.Controls.Add(this.label11);
@@ -115,6 +120,18 @@
             this.groupBox1.Size = new System.Drawing.Size(285, 188);
             this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
+            // 
+            // btn_change_setinfo
+            // 
+            this.btn_change_setinfo.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.btn_change_setinfo.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btn_change_setinfo.Location = new System.Drawing.Point(6, 84);
+            this.btn_change_setinfo.Name = "btn_change_setinfo";
+            this.btn_change_setinfo.Size = new System.Drawing.Size(273, 30);
+            this.btn_change_setinfo.TabIndex = 9;
+            this.btn_change_setinfo.Text = "Change Setinfo";
+            this.btn_change_setinfo.UseVisualStyleBackColor = false;
+            this.btn_change_setinfo.Click += new System.EventHandler(this.btn_change_setinfo_Click);
             // 
             // tb_password
             // 
@@ -348,7 +365,7 @@
             this.btn_Start.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btn_Start.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_Start.ForeColor = System.Drawing.Color.Aqua;
-            this.btn_Start.Location = new System.Drawing.Point(3, 475);
+            this.btn_Start.Location = new System.Drawing.Point(6, 3);
             this.btn_Start.Name = "btn_Start";
             this.btn_Start.Size = new System.Drawing.Size(135, 23);
             this.btn_Start.TabIndex = 16;
@@ -363,7 +380,7 @@
             this.btn_Stop.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btn_Stop.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_Stop.ForeColor = System.Drawing.Color.Aqua;
-            this.btn_Stop.Location = new System.Drawing.Point(443, 475);
+            this.btn_Stop.Location = new System.Drawing.Point(443, 3);
             this.btn_Stop.Name = "btn_Stop";
             this.btn_Stop.Size = new System.Drawing.Size(135, 23);
             this.btn_Stop.TabIndex = 16;
@@ -426,7 +443,7 @@
             this.groupBox5.ForeColor = System.Drawing.Color.Aqua;
             this.groupBox5.Location = new System.Drawing.Point(584, 4);
             this.groupBox5.Name = "groupBox5";
-            this.groupBox5.Size = new System.Drawing.Size(323, 465);
+            this.groupBox5.Size = new System.Drawing.Size(337, 465);
             this.groupBox5.TabIndex = 19;
             this.groupBox5.TabStop = false;
             // 
@@ -466,7 +483,7 @@
             this.ProxyList.MaxLength = 2147483647;
             this.ProxyList.Multiline = true;
             this.ProxyList.Name = "ProxyList";
-            this.ProxyList.Size = new System.Drawing.Size(311, 383);
+            this.ProxyList.Size = new System.Drawing.Size(325, 383);
             this.ProxyList.TabIndex = 0;
             this.ProxyList.TextChanged += new System.EventHandler(this.ProxyList_TextChanged);
             // 
@@ -511,17 +528,14 @@
             // splitContainer1.Panel1
             // 
             this.splitContainer1.Panel1.Controls.Add(this.p_msgbox);
-            this.splitContainer1.Panel1.Controls.Add(this.cb_Proxy);
             this.splitContainer1.Panel1.Controls.Add(this.cb_NameText);
             this.splitContainer1.Panel1.Controls.Add(this.Connections);
             this.splitContainer1.Panel1.Controls.Add(this.groupBox5);
             this.splitContainer1.Panel1.Controls.Add(this.groupBox1);
             this.splitContainer1.Panel1.Controls.Add(this.groupBox2);
             this.splitContainer1.Panel1.Controls.Add(this.groupBox3);
-            this.splitContainer1.Panel1.Controls.Add(this.btn_Stop);
             this.splitContainer1.Panel1.Controls.Add(this.groupBox4);
-            this.splitContainer1.Panel1.Controls.Add(this.btn_Start);
-            this.splitContainer1.Panel1MinSize = 335;
+            this.splitContainer1.Panel1MinSize = 300;
             // 
             // splitContainer1.Panel2
             // 
@@ -529,11 +543,14 @@
             this.splitContainer1.Panel2.Controls.Add(this.lbl_Output);
             this.splitContainer1.Panel2.Controls.Add(this.rtb_Console);
             this.splitContainer1.Panel2.Controls.Add(this.label8);
-            this.splitContainer1.Panel2MinSize = 0;
+            this.splitContainer1.Panel2.Controls.Add(this.btn_Start);
+            this.splitContainer1.Panel2.Controls.Add(this.btn_Stop);
+            this.splitContainer1.Panel2MinSize = 33;
             this.splitContainer1.Size = new System.Drawing.Size(929, 514);
-            this.splitContainer1.SplitterDistance = 485;
+            this.splitContainer1.SplitterDistance = 476;
             this.splitContainer1.SplitterWidth = 5;
             this.splitContainer1.TabIndex = 20;
+            this.splitContainer1.SplitterMoved += new System.Windows.Forms.SplitterEventHandler(this.splitContainer1_SplitterMoved);
             // 
             // p_msgbox
             // 
@@ -553,16 +570,6 @@
             this.lbl_msgbox.Size = new System.Drawing.Size(200, 100);
             this.lbl_msgbox.TabIndex = 0;
             this.lbl_msgbox.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.lbl_msgbox.Click += new System.EventHandler(this.lbl_msgbox_Click);
-            // 
-            // cb_Proxy
-            // 
-            this.cb_Proxy.AutoSize = true;
-            this.cb_Proxy.Location = new System.Drawing.Point(580, 7);
-            this.cb_Proxy.Name = "cb_Proxy";
-            this.cb_Proxy.Size = new System.Drawing.Size(15, 14);
-            this.cb_Proxy.TabIndex = 9;
-            this.cb_Proxy.UseVisualStyleBackColor = true;
             // 
             // cb_NameText
             // 
@@ -582,7 +589,7 @@
             this.cb_AutoScroll.Checked = true;
             this.cb_AutoScroll.CheckState = System.Windows.Forms.CheckState.Checked;
             this.cb_AutoScroll.ForeColor = System.Drawing.Color.Aqua;
-            this.cb_AutoScroll.Location = new System.Drawing.Point(843, 5);
+            this.cb_AutoScroll.Location = new System.Drawing.Point(847, 35);
             this.cb_AutoScroll.Name = "cb_AutoScroll";
             this.cb_AutoScroll.Size = new System.Drawing.Size(74, 17);
             this.cb_AutoScroll.TabIndex = 21;
@@ -593,7 +600,7 @@
             // 
             this.lbl_Output.AutoSize = true;
             this.lbl_Output.ForeColor = System.Drawing.Color.Aqua;
-            this.lbl_Output.Location = new System.Drawing.Point(89, 6);
+            this.lbl_Output.Location = new System.Drawing.Point(93, 36);
             this.lbl_Output.Name = "lbl_Output";
             this.lbl_Output.Size = new System.Drawing.Size(25, 13);
             this.lbl_Output.TabIndex = 20;
@@ -603,10 +610,10 @@
             // 
             this.rtb_Console.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.rtb_Console.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.rtb_Console.Location = new System.Drawing.Point(11, 23);
+            this.rtb_Console.Location = new System.Drawing.Point(6, 53);
             this.rtb_Console.Name = "rtb_Console";
             this.rtb_Console.ReadOnly = true;
-            this.rtb_Console.Size = new System.Drawing.Size(906, 134);
+            this.rtb_Console.Size = new System.Drawing.Size(915, 145);
             this.rtb_Console.TabIndex = 8;
             this.rtb_Console.Text = "";
             this.rtb_Console.TextChanged += new System.EventHandler(this.rtb_Console_TextChanged);
@@ -616,28 +623,67 @@
             this.label8.AutoSize = true;
             this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold);
             this.label8.ForeColor = System.Drawing.Color.Aqua;
-            this.label8.Location = new System.Drawing.Point(0, 0);
+            this.label8.Location = new System.Drawing.Point(4, 30);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(74, 20);
             this.label8.TabIndex = 7;
             this.label8.Text = "Console";
+            // 
+            // groupBox6
+            // 
+            this.groupBox6.Controls.Add(this.label12);
+            this.groupBox6.Controls.Add(this.tb_setinfo);
+            this.groupBox6.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold);
+            this.groupBox6.ForeColor = System.Drawing.Color.Aqua;
+            this.groupBox6.Location = new System.Drawing.Point(935, 0);
+            this.groupBox6.Name = "groupBox6";
+            this.groupBox6.Size = new System.Drawing.Size(344, 543);
+            this.groupBox6.TabIndex = 22;
+            this.groupBox6.TabStop = false;
+            this.groupBox6.Text = "Setinfo";
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.label12.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(142)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
+            this.label12.Location = new System.Drawing.Point(6, 22);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(316, 60);
+            this.label12.TabIndex = 1;
+            this.label12.Text = "Note:\r\n<name> = random name/Prefix_(6 random char)\r\n<1-10> = random number bitwee" +
+    "n 1 and 10\r\n<model> = random model name";
+            // 
+            // tb_setinfo
+            // 
+            this.tb_setinfo.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.tb_setinfo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.tb_setinfo.ForeColor = System.Drawing.Color.Aqua;
+            this.tb_setinfo.Location = new System.Drawing.Point(6, 89);
+            this.tb_setinfo.Multiline = true;
+            this.tb_setinfo.Name = "tb_setinfo";
+            this.tb_setinfo.Size = new System.Drawing.Size(332, 446);
+            this.tb_setinfo.TabIndex = 0;
+            this.tb_setinfo.Text = "\\bottomcolor\\<20-150>\r\n\\cl_dlmax\\128\r\n\\cl_lc\\1\r\n\\cl_lw\\1\r\n\\model\\<model>\r\n\\name\\<" +
+    "name>\r\n\\topcolor\\<0-300>\r\n\\cl_updaterate\\<20-101>\r\n\\_cl_autowepswitch\\<0-1>";
             // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Black;
-            this.ClientSize = new System.Drawing.Size(930, 545);
+            this.ClientSize = new System.Drawing.Size(1285, 545);
+            this.Controls.Add(this.groupBox6);
             this.Controls.Add(this.splitContainer1);
             this.Controls.Add(this.DragPanel);
             this.Controls.Add(this.button1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
-            this.MinimumSize = new System.Drawing.Size(599, 528);
+            this.MinimumSize = new System.Drawing.Size(930, 545);
             this.Name = "FormMain";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Invisible Idle Player v2.0 by Kova";
+            this.Text = "Invisible Idle Player v2.3.1 by Kova";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FormMain_FormClosing);
             this.Load += new System.EventHandler(this.Form1_Load);
             this.groupBox1.ResumeLayout(false);
@@ -660,6 +706,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
             this.p_msgbox.ResumeLayout(false);
+            this.groupBox6.ResumeLayout(false);
+            this.groupBox6.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -693,7 +741,6 @@
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.SplitContainer splitContainer1;
         private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.CheckBox cb_Proxy;
         private System.Windows.Forms.CheckBox cb_NameText;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.TextBox tb_Threads;
@@ -713,6 +760,10 @@
         private System.Windows.Forms.CheckBox cb_AutoScroll;
         private System.Windows.Forms.Panel p_msgbox;
         private System.Windows.Forms.Label lbl_msgbox;
+        private System.Windows.Forms.GroupBox groupBox6;
+        private System.Windows.Forms.Button btn_change_setinfo;
+        private System.Windows.Forms.Label label12;
+        public System.Windows.Forms.TextBox tb_setinfo;
     }
 }
 

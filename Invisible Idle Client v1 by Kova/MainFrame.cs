@@ -23,6 +23,7 @@ namespace IICv2
         public FormMain()
         {
             InitializeComponent();
+            this.Size = new Size(930, 545);
             Connections.MouseClick += Connections_MouseClick;
             splitContainer1.SplitterWidth = 5;
             splitContainer1.SplitterDistance = 510;
@@ -51,11 +52,10 @@ namespace IICv2
                 {
                     string list = string.Empty;
                     while (!sr.EndOfStream)
-                        list += sr.ReadLine() + "\n";
+                        list += sr.ReadLine() + "\r\n";
                     ProxyList.Text = list;
 
                 }
-                cb_Proxy.Checked = true;
             }
         }
 
@@ -291,7 +291,7 @@ namespace IICv2
         #endregion
 
         private List<Thread> Connects = new List<Thread>();
-        private void ProxyConnect(FormMain _form, string _server, int _steamid, int _interval, int _timeout)
+        private void CreateProxyThreads(FormMain _form, string _server, int _steamid, int _interval, int _timeout)
         {
             List<List<string>> SplitThread = new List<List<string>>();
             var Proxys = ProxyList.Lines.ToList();
@@ -323,7 +323,7 @@ namespace IICv2
                                 if (Banned.Any(x => x == array[0]) || clients.Any(client => client.Proxyaddress == array[0]))
                                 {
                                     if (ActiveProxyTunnel > 0) ActiveProxyTunnel--;
-                                    continue;
+                                        continue;
                                 }
                                 
                                 var user = new User(_form, GetRandomName(), _server, _steamid, _interval, array[0], Convert.ToInt32(array[1]), _timeout);
@@ -365,7 +365,14 @@ namespace IICv2
         private int ConnectedUser = 0;
         private void btn_Start_Click(object sender, EventArgs e)
         {
-            PrintC($"[STARTED] IP: {ServerList.Text} | Proxy: {cb_Proxy.Checked}({ProxyList.Lines.Length}) | Name: {cb_NameText.Checked}", Color.Cyan);
+            if (ProxyList.Lines.Length < int.Parse(tb_Threads.Text))
+            {
+                MessageBox.Show($"You only added {ProxyList.Lines.Length} proxy address, you need more that your threads ({int.Parse(tb_Threads.Text)})!", "Proxy count",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            Connects.Clear();
+            PrintC($"[STARTED] IP: {ServerList.Text} | Proxy: {ProxyList.Lines.Length} | Name: {cb_NameText.Checked}", Color.Cyan);
             isRunning = true;
             taskrun = true;
             SwapReadOnly(
@@ -377,19 +384,18 @@ namespace IICv2
                 RefreshRate,
                 tb_Threads,
                 tb_Timeout,
-                tb_password
+                tb_password,
+                tb_setinfo
             );
 
             SwapEnable(
-                cb_Proxy,
                 cb_NameText,
                 btn_Start,
                 btn_Stop,
                 steamid
             );
 
-            if (cb_Proxy.Checked)
-                ProxyConnect(this, ServerList.Lines[0], steamid.SelectedIndex, int.Parse(RefreshRate.Text), int.Parse(tb_Timeout.Text));
+            CreateProxyThreads(this, ServerList.Lines[0], steamid.SelectedIndex, int.Parse(RefreshRate.Text), int.Parse(tb_Timeout.Text));
 
             Refresher.Start();
 
@@ -403,7 +409,7 @@ namespace IICv2
 
         private void ShutdownConnect()
         {
-            PrintC($"[STOPED] IP: {ServerList.Text} | Proxy: {cb_Proxy.Checked}({ProxyList.Lines.Length}) | Name: {cb_NameText.Checked}", Color.Cyan);
+            PrintC($"[STOPED] IP: {ServerList.Text} | Proxy: {ProxyList.Lines.Length} | Name: {cb_NameText.Checked}", Color.Cyan);
             Refresher.Stop();
             isRunning = false;
             taskrun = false;
@@ -418,7 +424,6 @@ namespace IICv2
                 try { if (client.Proxy != null) client.Proxy.Close(); } catch (Exception) { }
                 ConnectionsRowDelete(client.Identity);
             }
-            Connects.Clear();
             Connections.Rows.Clear();
             ActiveConnects.Clear();
             clients.Clear();
@@ -433,11 +438,11 @@ namespace IICv2
                 RefreshRate,
                 tb_Threads,
                 tb_Timeout,
-                tb_password
+                tb_password,
+                tb_setinfo
             );
 
             SwapEnable(
-                cb_Proxy,
                 cb_NameText,
                 btn_Start,
                 btn_Stop,
@@ -589,9 +594,21 @@ namespace IICv2
             }
         }
 
-        private void lbl_msgbox_Click(object sender, EventArgs e)
+        private void splitContainer1_SplitterMoved(object sender, SplitterEventArgs e)
         {
 
+        }
+
+        private bool setinfoShow = false;
+        private void btn_change_setinfo_Click(object sender, EventArgs e)
+        {
+
+            if (setinfoShow)
+                this.Size = new Size(930, 545);
+            else
+                this.Size = new Size(1285, 545);
+
+            setinfoShow = !setinfoShow;
         }
 
         private void Connections_MouseClick(object sender, MouseEventArgs e)
@@ -606,8 +623,8 @@ namespace IICv2
             if (currentMouseOverRow >= 0)
             {
                 Connections.Rows[currentMouseOverRow].Selected = true;
-                m.Items.Add(new ToolStripMenuItem() { Text = "rename", Name = "Random name", Tag = currentMouseOverRow });
-                m.Items.Add(new ToolStripMenuItem() { Text = "remove", Name = "Remove", Tag = currentMouseOverRow });
+                m.Items.Add(new ToolStripMenuItem() { Text = "rename", Name = "Random name", Tag = ((string)this.Connections.Rows[currentMouseOverRow].Cells[0].Value) });
+                m.Items.Add(new ToolStripMenuItem() { Text = "remove", Name = "Remove", Tag = ((string)this.Connections.Rows[currentMouseOverRow].Cells[0].Value) });
                 m.Show(Connections, new Point(e.X, e.Y));
                 m.ItemClicked += M_ItemClicked;
             }
@@ -615,10 +632,10 @@ namespace IICv2
 
         private void M_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
         {
-            var cell_identy = Guid.Parse((string)this.Connections.Rows[(int)e.ClickedItem.Tag].Cells[0].Value);
-            if (clients.Any(user => user.Identity == Guid.Parse((string)this.Connections.Rows[(int)e.ClickedItem.Tag].Cells[0].Value)))
+            var cell_identy = Guid.Parse((string)e.ClickedItem.Tag);
+            if (clients.Any(user => user.Identity == cell_identy))
             {
-                User user = clients.First(x => x.Identity == Guid.Parse((string)this.Connections.Rows[(int)e.ClickedItem.Tag].Cells[0].Value));
+                User user = clients.First(x => x.Identity == cell_identy);
                 switch (e.ClickedItem.Text)
                 {
                     case "rename":
@@ -627,11 +644,11 @@ namespace IICv2
                         ConnectionsEditRow(user.Identity, 1, newname);
                         break;
                     case "remove":
-                        try { user.Proxy.Close(); } catch (Exception) {}
+                        try { user.Proxy.Close(); } catch (Exception) { }
                         ConnectionsRowDelete(user.Identity);
                         if (ActiveConnects.ContainsKey(user.Identity))
                         {
-                            user.Kill = true;
+                            user.Terminate();
                             PrintC($"[{user.Identity}] | TERMINATED | REASON: By user input", Color.Red);
                             ActiveConnects.Remove(user.Identity);
                         }
@@ -640,6 +657,10 @@ namespace IICv2
                     default:
                         break;
                 }
+            }
+            else
+            {
+                PrintC($"[{cell_identy.ToString()}] | INVALID    | REASON: Doesn't exist anymore", Color.Red);
             }
         }
 

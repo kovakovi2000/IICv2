@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Invisible Idle Client v1 by Kova")]
+[assembly: AssemblyTitle("IICv2")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Microsoft")]
-[assembly: AssemblyProduct("Invisible Idle Client v1 by Kova")]
+[assembly: AssemblyProduct("IICv2")]
 [assembly: AssemblyCopyright("Copyright © Microsoft 2021")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
