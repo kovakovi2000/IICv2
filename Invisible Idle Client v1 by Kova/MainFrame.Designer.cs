@@ -683,7 +683,7 @@
             this.MinimumSize = new System.Drawing.Size(930, 545);
             this.Name = "FormMain";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Invisible Idle Player v2.3.1 by Kova";
+            this.Text = "Invisible Idle Player v2.7.227";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FormMain_FormClosing);
             this.Load += new System.EventHandler(this.Form1_Load);
             this.groupBox1.ResumeLayout(false);

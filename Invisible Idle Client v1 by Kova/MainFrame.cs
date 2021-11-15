@@ -371,6 +371,7 @@ namespace IICv2
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
+            User.NullAddress();
             Connects.Clear();
             PrintC($"[STARTED] IP: {ServerList.Text} | Proxy: {ProxyList.Lines.Length} | Name: {cb_NameText.Checked}", Color.Cyan);
             isRunning = true;

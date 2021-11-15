@@ -63,9 +63,13 @@ namespace IICv2
         public bool Kill { get => kill; }
         public void Terminate() => kill = true;
 
+        public static void NullAddress()
+        {
+            desAddress = null;
+            desPort = -1;
+        }
         public User(FormMain _form, string _nick, string _address, int _steamid, int _interval, string _proxy = null, int _proxyport = 0, int _timeout = 0)
         {
-            
             this.proxyaddress = _proxy;
             this.proxyport = _proxyport;
             this.socklientProxyClient = new Socklient(IPAddress.Parse(_proxy), _proxyport);
@@ -168,7 +172,7 @@ namespace IICv2
             list.AddRange(Encoding.Default.GetBytes(fullstring2));
 
             //Start steamid certificated
-            list.AddRange(new byte[] { 0x0A }); // validation SV_GetIDString
+            list.AddRange(new byte[] { 0xff, 0x42, 0x30, 0x54, 0xff, 0x0A }); // validation SV_GetIDString
             switch (steamid)
             {
                 case 0:
@@ -346,7 +350,7 @@ namespace IICv2
             if (s.Contains("Invalid userinfo"))
                 Rename(form.GetRandomName());
 
-            if (s.Contains("banned") && !kill)
+            if ((s.ToLower().Contains("banned") || s.ToLower().Contains("proxy") ) && !kill)
             {
                 form.RowChangeColor(identity, Color.Magenta);
                 form.PrintC($"[{identity}] | BANNED     | IP:{proxyaddress}", Color.Purple);
