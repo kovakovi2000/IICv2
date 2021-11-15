@@ -1,5 +1,3 @@
-# Invisible Idle Client v2 aka IICv2
-
 ## Disclaimer:
 - Only for educational purposes.
 - Do NOT use it without the target permisson.
