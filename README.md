@@ -1,7 +1,7 @@
 ## Disclaimer:
 - Only for educational purposes.
 - Do NOT use it without the target permisson.
-- I don't take any responsibility for intended harm by this program.
+- I don't take any responsibility for any harm by this program.
 
 ## Bypass:
 This program bypass the lastest anti-fakeplayer detectors on any counter strike 1.6 server.
